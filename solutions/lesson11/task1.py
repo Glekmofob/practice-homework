@@ -1,28 +1,25 @@
-from dataclasses import dataclass
 from math import acos, isclose
 
-
-@dataclass(eq=False, frozen=True)
 class Vector2D:
-    abscissa: float = 0.0
-    ordinate: float = 0.0
+    _abscissa: float
+    _ordinate: float 
 
-    # def __init__(self, abscissa: float, ordinate: float):
-    #     self.abscissa = abscissa
-    #     self.ordinate = ordinate
-    # def __repr__(self):
-    #     return f"Vector2D(abscissa={self.abscissa}, ordinate={self.ordinate})"
-    def __post_init__(self):
-        object.__setattr__(self, "abscissa", float(self.abscissa))
-        object.__setattr__(self, "ordinate", float(self.ordinate))
 
-    @property
-    def get_x(self):
-        return self.abscissa
+    def __init__(self, abscissa: float = 0., ordinate: float= 0.):
+        self._abscissa = abscissa
+        self._ordinate = ordinate
+    
+    
+    def __repr__(self):
+        return (f"Vector2D(abscissa={self._abscissa}, ordinate={self._ordinate})")
 
     @property
-    def get_y(self):
-        return self.ordinate
+    def abscissa(self):
+        return self._abscissa
+
+    @property
+    def ordinate(self):
+        return self._ordinate
 
     def __ne__(self, other: "Vector2D"):
         return not (self == other)
@@ -30,21 +27,19 @@ class Vector2D:
     def __eq__(self, other):
         if not isinstance(other, Vector2D):
             return NotImplemented
-        return isclose(self.abscissa, other.abscissa, rel_tol=1e-9, abs_tol=1e-10) and isclose(
-            self.ordinate, other.ordinate, rel_tol=1e-9, abs_tol=1e-10
-        )
+        return isclose(self.abscissa, other.abscissa) and isclose(
+            self.ordinate, other.ordinate)
 
     def __lt__(self, other):
         if not isinstance(other, Vector2D):
             return NotImplemented
         return (
             self.abscissa < other.abscissa
-            and not (isclose(self.abscissa, other.abscissa, rel_tol=1e-9, abs_tol=1e-10))
+            and not (isclose(self.abscissa, other.abscissa))
         ) or (
-            isclose(self.abscissa, other.abscissa, rel_tol=1e-9, abs_tol=1e-10)
+            isclose(self.abscissa, other.abscissa)
             and self.ordinate < other.ordinate
-            and not (isclose(self.ordinate, other.ordinate))
-        )
+            and not (isclose(self.ordinate, other.ordinate)))
 
     def __le__(self, other):
         return self == other or self < other
@@ -110,7 +105,7 @@ class Vector2D:
 
     def get_angle(self, other: "Vector2D") -> float:
         if not isinstance(other, Vector2D):
-            raise TypeError("other must be Vector2D")
+            raise TypeError("Other must be Vector2D")
         if isclose(abs(other), 0) or isclose(abs(self), 0):
             raise ValueError("You cannot get angle in between given vector and a zero vector")
         return acos((self @ other) / (abs(self) * abs(other)))
