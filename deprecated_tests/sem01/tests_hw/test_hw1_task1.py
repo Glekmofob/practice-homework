@@ -5,6 +5,7 @@ import pytest
 # Импортируем тестируемую функцию и константу
 from homeworks.hw1.aggregate_segmentation import ALLOWED_TYPES, aggregate_segmentation
 
+
 class TestAggregateSegmentation:
     """Тесты для функции агрегации сегментации аудио данных."""
 

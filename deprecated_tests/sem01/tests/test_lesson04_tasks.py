@@ -9,21 +9,25 @@ from solutions.sem01.lesson04.task4 import move_zeros_to_end
 from solutions.sem01.lesson04.task5 import find_row_with_most_ones
 from solutions.sem01.lesson04.task6 import count_cycles
 
-@pytest.mark.parametrize("lst, expected", [
-    pytest.param([], True, id="empty_list"),
-    pytest.param([5], True, id="single_element"),
-    pytest.param([1, 3], True, id="two_elements"),
-    pytest.param([3, 1], True, id="two_elements_unsorted"),
-    pytest.param([1, 3, 5, 7], True, id="already_sorted_ap"),
-    pytest.param([3, 1, 5, 7], True, id="unsorted_ap"),
-    pytest.param([1, 2, 4], False, id="not_ap"),
-    pytest.param([10, 5, 0, -5], True, id="negative_difference"),
-    pytest.param([1, 1, 1, 1], True, id="constant_sequence"),
-    pytest.param([1, 2, 3, 5], False, id="almost_ap_but_not"),
-    pytest.param([0, 0, 1], False, id="two_same_one_different"),
-    pytest.param([10**5 + i*10**2 for i in range(1000)], True, id="long_list_true"),
-    pytest.param([10**5 + i*10**2 for i in range(999)] + [1], False, id="long_list_false"),
-])
+
+@pytest.mark.parametrize(
+    "lst, expected",
+    [
+        pytest.param([], True, id="empty_list"),
+        pytest.param([5], True, id="single_element"),
+        pytest.param([1, 3], True, id="two_elements"),
+        pytest.param([3, 1], True, id="two_elements_unsorted"),
+        pytest.param([1, 3, 5, 7], True, id="already_sorted_ap"),
+        pytest.param([3, 1, 5, 7], True, id="unsorted_ap"),
+        pytest.param([1, 2, 4], False, id="not_ap"),
+        pytest.param([10, 5, 0, -5], True, id="negative_difference"),
+        pytest.param([1, 1, 1, 1], True, id="constant_sequence"),
+        pytest.param([1, 2, 3, 5], False, id="almost_ap_but_not"),
+        pytest.param([0, 0, 1], False, id="two_same_one_different"),
+        pytest.param([10**5 + i * 10**2 for i in range(1000)], True, id="long_list_true"),
+        pytest.param([10**5 + i * 10**2 for i in range(999)] + [1], False, id="long_list_false"),
+    ],
+)
 def test_is_arithmetic_progression_parametrized(lst, expected):
     if len(lst) > 500:
         random.shuffle(lst)

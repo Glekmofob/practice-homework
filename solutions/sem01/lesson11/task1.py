@@ -1,17 +1,16 @@
 from math import acos, isclose
 
+
 class Vector2D:
     _abscissa: float
-    _ordinate: float 
+    _ordinate: float
 
-
-    def __init__(self, abscissa: float = 0., ordinate: float= 0.):
+    def __init__(self, abscissa: float = 0.0, ordinate: float = 0.0):
         self._abscissa = abscissa
         self._ordinate = ordinate
-    
-    
+
     def __repr__(self):
-        return (f"Vector2D(abscissa={self._abscissa}, ordinate={self._ordinate})")
+        return f"Vector2D(abscissa={self._abscissa}, ordinate={self._ordinate})"
 
     @property
     def abscissa(self):
@@ -27,19 +26,18 @@ class Vector2D:
     def __eq__(self, other):
         if not isinstance(other, Vector2D):
             return NotImplemented
-        return isclose(self.abscissa, other.abscissa) and isclose(
-            self.ordinate, other.ordinate)
+        return isclose(self.abscissa, other.abscissa) and isclose(self.ordinate, other.ordinate)
 
     def __lt__(self, other):
         if not isinstance(other, Vector2D):
             return NotImplemented
         return (
-            self.abscissa < other.abscissa
-            and not (isclose(self.abscissa, other.abscissa))
+            self.abscissa < other.abscissa and not (isclose(self.abscissa, other.abscissa))
         ) or (
             isclose(self.abscissa, other.abscissa)
             and self.ordinate < other.ordinate
-            and not (isclose(self.ordinate, other.ordinate)))
+            and not (isclose(self.ordinate, other.ordinate))
+        )
 
     def __le__(self, other):
         return self == other or self < other
