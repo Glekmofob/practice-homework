@@ -27,7 +27,8 @@ def convert_to_sphere(
         raise ShapeMismatchError
     distance = np.sqrt(abscissa**2 + ordinates**2 + applicates**2)
     azimuth = np.arctan2(ordinates, abscissa)
-    inciclination = np.arccos(
-        np.divide(applicates, distance), where=distance != 0
-    )  # https://ru.stackoverflow.com/questions/1162129/Оставить-нули-при-делении-на-ноль-вместо-inf-в-python-через-numpy
+    inciclination = np.zeros_like(distance)
+    compare_mask = distance != 0.0
+
+    inciclination[compare_mask] = np.arccos(applicates[compare_mask] / distance[compare_mask])
     return distance, azimuth, inciclination
