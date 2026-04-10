@@ -24,9 +24,7 @@ def solution():
     x = np.arange(len(stages_order))
     width = 0.35
 
-    ax.bar(
-        x - width / 2, before_count, width, label="До установки", color="red", edgecolor="black"
-    )
+    ax.bar(x - width / 2, before_count, width, label="До установки", color="red", edgecolor="black")
     ax.bar(
         x + width / 2, after_count, width, label="После установки", color="green", edgecolor="black"
     )
@@ -39,6 +37,7 @@ def solution():
 
     plt.savefig("result.png")
     plt.show()
+
 
 if __name__ == "__main__":
     solution()
