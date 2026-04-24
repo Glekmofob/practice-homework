@@ -170,8 +170,8 @@ if __name__ == "__main__":
 
     # Пример 2
 
-    maze_path = ("C:\\MIPT_Progamming_studies\\Python_course\
-                 \practice-homework\\solutions\\sem02\\lesson08\\data\\maze.npy")
+    maze_path = "C:\\MIPT_Progamming_studies\\Python_course\
+                 \practice-homework\\solutions\\sem02\\lesson08\\data\\maze.npy"
     loaded_maze = np.load(maze_path).astype(np.int32)
 
     # можете поменять, если захотите запустить из других точек
